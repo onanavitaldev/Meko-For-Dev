@@ -1,0 +1,28 @@
+@import url("/src/Scss/var.scss");
+/* Button */
+.btn {
+  background-color: var(--red);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-weight: normal;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  transition: var(--time);
+  text-align: center;
+  text-decoration-line: none;
+}
+
+.btn:hover {
+  background-color: var(--main-bg);
+  transform: translateY(-8px);
+}
+
+/* input */
+input {
+  border-radius: var(--radius);
+  caret-color: var(--color);
+  color: var(--white);
+  outline: none;
+  transition: var(--time);
+}/*# sourceMappingURL=components.css.map */

@@ -1,0 +1,400 @@
+*
+{
+    font-family: var(--font);
+}
+*::selection
+{
+    background-color: var(--red);
+    color: var(--white);
+}
+
+/* Body of App */
+body
+{
+    background-color: var(--main-bg-dark);
+    /* */
+    body::selection 
+    {
+        background-color: #fff;
+        color: var(--color);
+    }  
+    body::-webkit-scrollbar 
+    {
+        background-color: var(--color);
+        border-radius: 50px;
+        width: 6px;
+        padding: 3em;
+        z-index: 1;
+    } 
+    body::-webkit-scrollbar-corner 
+    {
+        background-color: #fff;
+        border-radius: 100vw;
+        width: 4px;
+        z-index: 1;
+    }
+    body::-webkit-scrollbar-button 
+    {
+        display: none;
+        border-radius: 2px;
+        z-index: 1;
+    } 
+    body::-webkit-scrollbar-thumb 
+    {
+        background-color: var(--color) !important;
+        border-radius: 5px;
+        width: 1px;
+        padding: 5em;
+        border: 0.25em solid transparent;
+        z-index: 1;
+    }
+    body::-webkit-scrollbar-thumb 
+    {
+        background-color: var(--color) !important;
+        border-radius: 2px;
+        width: 0.2px;
+        padding: 5em;
+        border: 0.18em solid var(--white);
+        z-index: 1;
+    }
+}
+
+/* #################### HOMEPAGE ##################### */
+#header_startPage
+{
+    background-image: linear-gradient(to bottom, rgba(4, 1, 9, 0.872) 3%, rgba(7, 1, 17, 0.967) 60%),
+    url('../../assets/img/cover.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    .flex h1
+    {
+        animation: zoomIn 1s;
+    }
+}
+
+/* ###################### Barre de navigation gauche #######################" */
+#nav-left {
+    background-color: var(--main-bg);
+    top: 0.4px;
+    left: 0;
+    width: 100px;
+    border-right: none;
+    height: 1000px;
+    padding: 8px 14px;
+    position: fixed;
+    z-index: 1000;
+    transition: all 0.8s ease-in 0s;
+}
+#nav-left #link_ li 
+{
+    font-size: 17px;
+    margin: 25px 10px;
+    padding: 0.9em;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    background-color: var(--main-bg);
+    border-radius: 50px;
+    transition: all 0.3s ease-in 0s;
+}
+#nav-left #link_ li:hover
+{
+    background-color: var(--main-bg-dark);
+    transform: scale(1.1);
+}
+
+/* ###################### Barre de navigation droite #######################" */
+#nav-right {
+    display: none;
+    background-color: #000;
+    top: 0.4px;
+    right: 0;
+    width: 300px;
+    border-right: none;
+    height: 1000px;
+    padding: 8px 14px;
+    position: fixed;
+    z-index: 999;
+    transition: all 0.8s ease-in 0s;
+}
+#nav-right #link_ li 
+{
+    font-size: 17px;
+    margin: 25px 10px;
+    padding: 0.9em;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    background-color: var(--main-bg);
+    border-radius: 50px;
+    transition: all 0.3s ease-in 0s;
+}
+#nav-right #link_ li:hover
+{
+    background-color: var(--main-bg-dark);
+    transform: scale(1.1);
+}
+
+/* Fonctionnalités: Listes sur le dahsboard */
+#features
+{
+    margin-bottom: -50px;
+    .p-5
+    {
+        background-color: var(--main-bg);
+        border: 0.7px solid transparent;
+        border-left: 0.7px solid var(--red);
+        padding: 40px;
+        cursor: pointer;
+        transition: var(--time);
+    }
+    .p-5:hover
+    {
+        border: 0.7px solid var(--red);
+    }
+}
+
+/* ################ Page de connexion / Inscription ################ */
+.form_connexion_inscription {
+    display: flex;
+    background-color: var(--main-bg);
+    flex-direction: column;
+    width: 350px;
+    padding: 38px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+}
+.form_connexion_inscription .message_error {
+    color: red;
+    font-size: 14px;
+}
+.form_connexion_inscription  label {
+    margin: 2px 0;
+}
+.form_connexion_inscription input {
+    background-color: var(--main-bg-dark);
+    caret-color: var(--red);
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 50px;
+    border: none;
+}
+.form_connexion_inscription input:focus {
+    border: none;
+    outline: none;
+}
+.form_connexion_inscription input::placeholder {
+    color: #f4f3f3;
+    margin-left: 45px;
+}
+.form_connexion_inscription input[type='submit']{
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: var(--red);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+}
+.form_connexion_inscription input[type='submit']:hover{
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: var(--main-bg-dark);
+    border: none;
+    border-radius: 50px;
+    color: var(--white);
+}
+.form_connexion_inscription .link {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration-line: underline;
+}
+.link a {
+    color: var(--white);
+    font-size: 14px;
+    text-decoration: 0;
+}
+.link a:hover {
+    text-decoration: underline;
+}
+
+#send_mail_box
+{
+    #form
+    {
+        margin-left: -29px;
+    }
+    #form input,
+    #form textarea
+    {
+        background-color: var(--main-bg);
+        border: 0.8px solid var(--main-bg);
+        caret-color: var(--red);
+        color: var(--white);
+        resize: none;
+        outline: none;
+    }
+    #form input:hover,
+    #form textarea:hover
+    {
+        border: 0.8px solid var(--red);
+    }
+    button
+    {
+        background-color: var(--red);
+        border-radius: 5px;
+    }
+}
+
+/* ############# Menu ###########" */
+#message_btn 
+{
+    z-index: 1000;
+    position: fixed;
+    place-items: center;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 2em;
+    text-align: center;
+    height: 3rem;
+    width: 3rem;
+    right: 4rem;
+    cursor: pointer;
+    bottom: 6rem;
+    fill: #fff;
+    border: none;
+    background-color: var(--red);
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    padding: 0.3em;
+    animation: fadeInUp 0.5s;
+    transition: all 0.3s ease-in 0s;
+}
+
+/* ########### Account informations ########## */
+#infos_account
+{
+    #items #content
+    {
+        background-color: var(--main-bg);
+        border: 1px solid transparent;
+        border-radius: 5px;
+        cursor: var(--pointer);
+        color: var(--white);
+        padding: 15px;
+    }
+    #items #content:hover
+    {
+        border: 1px solid var(--red);
+    }
+}
+
+/* #################### Chat Box ##################### */
+.chat {
+    background-color: transparent;
+    padding: 15px;
+    border-radius: 6px;
+}
+// .button-email {
+//     font-size: 13px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+// }
+// .Deconnexion_btn {
+//     padding: 5px 20px;
+//     color: #fff;
+//     background-color: var(--color);
+//     font-size: 14px;
+//     text-decoration: 0;
+//     border-radius: 6px;
+// }
+.messages_box {
+    min-height: 360px;
+    max-height: 580px;
+    min-width: 400px;
+    overflow: auto;
+    border-top: none;
+}
+.messages_box .message {
+   margin-bottom: 15px;
+   padding: 8px;
+   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+   width: 350px;
+}
+.messages_box .message span {
+    font-weight: bold;
+    font-size: 14px;
+}
+.messages_box p {
+    word-break: break-all;
+    font-size: 13px
+}
+.your_message {
+    border: 1px solid var(--color);
+    background-color: var(--color);
+    border-radius: 10px 10px 10px 0;
+    color: #fff;
+}
+.your_message span {
+    color: var(--color);
+}
+.others_message {
+    background-color: #201333;
+    border: 1px solid transparent;
+    margin-left: auto;
+    border-radius: 10px 10px 0 10px;
+}
+.others_message span {
+    color: #fff;
+}
+.date {
+    color: #ccc;
+}
+.send_message {
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 1400px;
+    bottom: 0;
+}
+.send_message input[type='text'] {
+    color: var(--white);
+    caret-color: var(--red);
+    resize: none;
+    background-color: var(--main-bg);
+    border-radius: 50px;
+    border: 0.7px solid transparent;
+    outline: 0;
+    padding: 14px;
+    font-size: 14px;
+}
+.send_message input[type='text']::placeholder {
+    color: #f1f1f1;
+}
+.send_message input[type='submit']{
+    padding: 5px 0;
+    margin-top: 10px;
+    border-radius: 50px;
+    background-color: var(--color);
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid var(--color);
+    cursor: pointer;
+}
+#message_inscription 
+{
+    padding: 10px 0;
+    margin: 5px 0;
+    text-align: center;
+    background-color: green;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 6px;
+}
