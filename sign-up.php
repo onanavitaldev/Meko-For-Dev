@@ -1,5 +1,3 @@
-<!-- Inclure le script de configuration de la base de donnée -->
-<?php include("config/config_task.php") ?>
 <?php 
     //démarer la session
     session_start();
@@ -17,67 +15,95 @@
     <!-- Titre -->
     <title>Créer un compte</title>
 </head>
-<body class="flex justify-around pt-20">
-    <?php
-        if(isset($_POST['button_inscription'])){
-           //si le formulaire est envoyé
-           //se connecter à la base de donnée
-           include "config/config_tchat.php";
-           //extraire les infos du formulaire
-           extract($_POST);
-           //verifions si les champs sont vides
-           if(isset($pseudo) && isset($work) && isset($email) && isset($mdp1) && $email != "" && $mdp1 != "" && isset($mdp2) && $mdp2 != "" && $pseudo != "" && $work != ""){
-               //verifions que les mots de passes sont conforme
-               if($mdp2 != $mdp1){
-                   // s'ils sont differrent
-                   $error = "Les Mots de passes sont différents !";
-               }else {
-                   //si non , verifions si l'email existe
-                   $req = mysqli_query($con , "SELECT * FROM utilisateurs WHERE email = '$email'");
-                   if(mysqli_num_rows($req) == 0){
-                    //si ça n'existe pas , créons le compte*
-                    // On hash le mot de passe avec Bcrypt, via un coût de 12
-                    // $cost = ['cost' => 12];
-                    // $mdp1 = password_hash($mdp1, PASSWORD_BCRYPT, $cost);
-                       $req = mysqli_query($con , "INSERT INTO utilisateurs VALUES (NULL, '$pseudo', '$work' ,'$email' , '$mdp1') ");
-                       if($req){
-                           // si le compte a été créer , créons une variable pour afficher un message dans la page de
-                           //connexion
-                           $_SESSION['message'] = "<p class='message_inscription'>Votre compte a été créer avec succès !</p>" ;
-                           //redirection vers la page de connexion
-                           header("Location:sign-in.php") ;
-                      
-                       }else {
-                           //si non
-                           $error = "Inscription Echouée !";
-                       }
-                   }else {
-                       //si ça existe
-                       $error = "Cet Email existe déjà !";
-                   }
-
-               }
-           }else {
-               $error = "Veuillez remplir tous les champs !" ;
-           }
-        }
-    ?>
-    <form action="" method="POST" class="form_connexion_inscription" >
+<body class="flex justify-around pt-5">
+    <form action="" method="POST" class="form_connexion_inscription" autocomplete="off">
         <h1 class="font-bold text-3xl text-white text-center pt-6">Inscrivez-vous</h1>
+        <?php
+            // On génère le code du captcha.
+            $num = rand(2340, 9999);
+            $text = str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            $final = substr($text, 0, 2);
+            $captcha = $num.$final;
+        ?>
+
+    <?php 
+        // On commence d'abord par vérifier si le formulaire a été soumis.
+        if (isset($_POST['submit'])) {
+            $code = "Echec";
+            // On extrait ensuite le formulaire.
+            extract($_POST);
+            // On se connecte à la base de données.
+            include 'config/conn.php';
+            // On vérifie si l'email est valide et n'existe pas dans la base.
+            include 'src/uniques/validEmail.php';
+            $req = mysqli_query($dbcon , "SELECT * FROM users WHERE email = '$email'");
+            if (!checkEmail($email) || mysqli_num_rows($req) > 0) {
+                $message = "Email invalide ou existe déja !";
+            } else {
+                # Sinon on continue en vérfiant si les deux mots de passe sont conformes.
+                if ($mdp1 != $mdp2) {
+                    $message = "Les deux mots de passe sont différents.";
+                } else {
+                    # On génère l'identifiant unique.
+                    include 'src/uniques/identifier.php';
+                    $id = getUniqueIdentifier(10); # size = 10
+                    #On hache le mot de passe en faisant un double hashage en md5.
+                    $mdp1 = md5(md5($mdp1));
+                    # On fini finalement par inscrire l'utilisateur...
+                    $req = mysqli_query($dbcon , "INSERT INTO `users` (`unique_identifier`, `name`, `username`, `email`, `password`, `bio`, `work`) VALUES ('$id', '$name', '$username', '$email', '$mdp1', 'Hey Je suis sur Meko', '$work');");
+                    // On vérfie ensuite si l'inscription n'a pas craché...
+                    if($req){
+                        $code = "Succès";
+                        $message = "Votre compte a été créé avec succès !";
+                    }
+                    else {
+                        $message = "Une erreur est survenue, veuillez réessayer !";
+                    }
+                    
+                    
+                }
+                
+            }
+            ?>
+            <h1 class="font-bold text-3xl text-white text-center pt-6"><?= $code; ?></h1>
+            <p class="text-center text-1xl text-gray-500 mb-6"><?= $message; ?></p>
+            <?php if ($code == "Echec") { ?>
+                    <a href="sign-up.php" class="text-white text-2xl pt-2 pb-2 text-center">Réessayer</a>
+                <?php } else { ?>
+                    <a href="sign-in.php" class="text-white text-2xl pt-2 pb-2 text-center">Se connecter</a>
+               <?php } ?>
+            
+            
+    <?php } 
+    
+    else { 
+        
+    ?>
+      
         <p class="text-center text-1xl text-gray-500 mb-6">
-            Créer votre compte Meko et monter en productivité
+            Créez rapidement votre compte <span class="font-bold">Meko</span> et montez en productivité.
         </p>
+        
         <p class="message_error"></p>
-        <input type="text" class="mb-4" name="pseudo" placeholder="Nom d'utilisateur">
-        <input type="text" class="mb-4" name="work" placeholder="Votre proféssion">
-        <input type="email" class="mb-4" name="email" placeholder="Votre adrèsse email">
-        <input type="password" name="mdp1" placeholder="Votre mot de passe" class="mdp1 mb-4">
+        <input type="text" class="mb-4" name="name" placeholder="Votre nom" autocomplete="off">
+        <input type="text" class="mb-4" name="username" placeholder="Nom d'utilisateur" autocomplete="off">
+        <input type="text" class="mb-4" name="work" placeholder="Votre profession">
+        <input type="email" class="mb-4" name="email" placeholder="Votre adresse email">
+        <input type="password" name="mdp1" placeholder="Choisir un mot de passe" class="mdp1 mb-4" autocomplete="off">
         <input type="password" name="mdp2" placeholder="Confirmer le mot de passe" class="mdp2">
-        <input type="submit" value="Je m'inscris" class="btn shadow-lg" name="button_inscription">
+        <!-- <br>
+        <input type="text" name="captchacode" placeholder="Entrez le code Captcha ci-dessous" class="mdp2">
+        <br>
+        <input type="text" name="" value="Code Captcha: <?= $captcha; ?>" class="mdp2" readonly style="background-color: var(--red); text-align:center; font-weight: 800;"> -->
+        <input type="submit" value="Je m'inscris" class="btn shadow-lg" name="submit">
+        <p class="text-center mb-2 mt-2 text-white">
+            En cliquant sur "Je m'inscris", vous avez lu et approuvé les <a href="#" class="text-gray-500"> termes et conditions d'utilisation de Meko.</a>
+        </p>
         <p class="link text-white">
-            Vous avez un compte ? <br>
+            Vous avez déja un compte ? <br>
             <a href="sign-in.php">Se connecter</a>
         </p>
+        <?php } ?>
     </form>
 
     <!-- Footer: Informations complémentaires -->

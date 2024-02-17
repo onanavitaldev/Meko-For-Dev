@@ -3,11 +3,6 @@
   font-family: var(--font);
 }
 
-*::-moz-selection {
-  background-color: var(--red);
-  color: var(--white);
-}
-
 *::selection {
   background-color: var(--red);
   color: var(--white);
@@ -17,10 +12,6 @@
 body {
   background-color: var(--main-bg-dark);
   /* */
-}
-body body::-moz-selection {
-  background-color: #fff;
-  color: var(--color);
 }
 body body::selection {
   background-color: #fff;
@@ -185,11 +176,6 @@ body body::-webkit-scrollbar-thumb {
   outline: none;
 }
 
-.form_connexion_inscription input::-moz-placeholder {
-  color: #f4f3f3;
-  margin-left: 45px;
-}
-
 .form_connexion_inscription input::placeholder {
   color: #f4f3f3;
   margin-left: 45px;
@@ -225,8 +211,11 @@ body body::-webkit-scrollbar-thumb {
 .link a {
   color: var(--white);
   font-size: 14px;
-  -webkit-text-decoration: 0;
-          text-decoration: 0;
+  text-decoration: 0;
+}
+
+.link span {
+  text-decoration: none !important;
 }
 
 .link a:hover {
@@ -371,10 +360,6 @@ body body::-webkit-scrollbar-thumb {
   font-size: 14px;
 }
 
-.send_message input[type=text]::-moz-placeholder {
-  color: #f1f1f1;
-}
-
 .send_message input[type=text]::placeholder {
   color: #f1f1f1;
 }
@@ -398,4 +383,6 @@ body body::-webkit-scrollbar-thumb {
   color: #fff;
   font-size: 12px;
   border-radius: 6px;
-}/*# sourceMappingURL=main.css.map */
+}
+
+/*# sourceMappingURL=main.css.map */

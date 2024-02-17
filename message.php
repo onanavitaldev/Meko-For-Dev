@@ -3,7 +3,7 @@
     if (isset($_SESSION['user'])) { 
         // si l'utilisateur s'est connecté
         //connexion à la abse de donnée
-        include "config/config_tchat.php";
+        include ("config/conn.php");
 
         //requete pour afficher les messages
         $req = mysqli_query($con, "SELECT * FROM messages ORDER BY id_m DESC");
@@ -41,3 +41,4 @@
     }
 
 ?>
+

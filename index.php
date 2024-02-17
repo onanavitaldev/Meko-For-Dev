@@ -1,5 +1,5 @@
 <!-- Inclure le script de configuration de la base de donnée -->
-<?php include("config/config_task.php") ?>
+<?php include ("config/conn.php"); ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 
