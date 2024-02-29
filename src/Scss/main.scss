@@ -163,8 +163,9 @@ body
     flex-direction: column;
     width: 350px;
     padding: 38px;
-    border-radius: 6px;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    margin-bottom: 16px;
 }
 .form_connexion_inscription .message_error {
     color: red;
@@ -218,10 +219,15 @@ body
     font-size: 14px;
     text-decoration: 0;
 }
+.link span{
+    text-decoration: none !important;
+}
 .link a:hover {
     text-decoration: underline;
 }
-
+.form-text{
+    text-align: center;
+}
 #send_mail_box
 {
     #form

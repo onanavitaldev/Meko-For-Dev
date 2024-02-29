@@ -1,7 +1,7 @@
 <!-- Inclure le script de configuration de la base de donnée -->
 <?php 
     session_start();
-    include("config/config_tchat.php");
+    include ("config/conn.php");
     if (isset($_SESSION['user'])) { 
         // si l'utilisateur s'est connecté
         //connexion à la abse de donnée

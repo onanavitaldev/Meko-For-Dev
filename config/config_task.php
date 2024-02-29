@@ -5,7 +5,7 @@
     Define('Host', 'localhost');               // Hébergeur ou serveur de l'app
     Define('User', 'root');                    // Utilisateur de la base de donnée
     Define('Password', '');                    // Mot de passe de la bade de donnée
-    Define('Database_name', 'ToDo_Manager');   // Nom de la base de donnée
+    Define('Database_name', 'Meko_For_Dev');   // Nom de la base de donnée
 
     try
     {
